@@ -87,7 +87,7 @@ public class PortalEvents implements Listener {
 
 		Sound sound = Sound.ORB_PICKUP;
 		try {
-			Sound.valueOf(splitted[0]);
+			sound = Sound.valueOf(splitted[0]);
 		} catch (Exception ignored) {
 		}
 
