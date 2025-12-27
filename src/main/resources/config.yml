@@ -1,0 +1,3 @@
+# sound: name, volume, pitch
+sound: ENDERMAN_TELEPORT;1;1
+cooldown: 1000
