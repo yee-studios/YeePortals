@@ -17,14 +17,19 @@ public class YeePortals extends JavaPlugin {
 	public void onEnable() {
 		saveDefaultConfig();
 		manager = new PortalManager(this);
-		manager.loadPortals();
 
-		String localeFilename = String.format("%s.yml", getConfig().getString("locale", "en"));
-		File localeConfigFile = Path.of(getDataFolder().toString(), localeFilename).toFile();
-		PortalMessages.localeConfig = YamlConfiguration.loadConfiguration(localeConfigFile);
+		load();
 
 		getServer().getPluginManager().registerEvents(new PortalEvents(this), this);
 		getCommand("portal").setExecutor(new PortalCommand(this, manager));
 		getLogger().info("YeePortals activado correctamente.");
+	}
+
+	public void load() {
+		reloadConfig();
+		manager.loadPortals();
+		String localeFilename = String.format("%s.yml", getConfig().getString("locale", "en"));
+		File localeConfigFile = Path.of(getDataFolder().toString(), localeFilename).toFile();
+		PortalMessages.localeConfig = YamlConfiguration.loadConfiguration(localeConfigFile);
 	}
 }

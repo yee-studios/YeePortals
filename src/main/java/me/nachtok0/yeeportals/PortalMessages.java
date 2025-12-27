@@ -24,8 +24,8 @@ public class PortalMessages {
 		sender.sendMessage(color + color(text));
 	}
 
-	public static String get(String key) {
-		return color(localeConfig.getString(key, key));
+	public static String get(String key, Object... format) {
+		return color(String.format(localeConfig.getString(key, key), format));
 	}
 
 	public static String color(String text) {

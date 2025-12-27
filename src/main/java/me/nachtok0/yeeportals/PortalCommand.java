@@ -57,20 +57,20 @@ public class PortalCommand implements CommandExecutor {
 		}
 
 		if (!sub.execute(sender, args))
-			PortalMessages.sendLocalized(sender, "subcommand_usage", displayUsage(sub));
+			PortalMessages.sendLocalized(sender, "subcommand_usage", displaySubcommand(sub));
 
 		return true;
 	}
 
-	private String displayUsage(PortalSubcommand sub) {
+	private String displaySubcommand(PortalSubcommand sub) {
 		return String.format("&e/portal &b%s", sub.getUsage());
 	}
 
 	private void showHelp(CommandSender sender) {
-		PortalMessages.send(sender, "&6--- %s ---", "help_menu_title", plugin.getName());
+		PortalMessages.send(sender, "&6--- %s ---", PortalMessages.get("help_menu_title", plugin.getName()));
 		for (PortalSubcommand sub : new HashSet<>(subcommands.values())) {
 			String description = PortalMessages.get(String.format("subcommand_descriptions.%s", sub.getName()));
-			PortalMessages.send(sender, String.format("&e%s&r - &f%s", displayUsage(sub), description));
+			PortalMessages.send(sender, String.format("&e%s&r - &f%s", displaySubcommand(sub), description));
 		}
 	}
 }

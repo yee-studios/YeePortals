@@ -1,6 +1,7 @@
 package me.nachtok0.yeeportals.subcommands;
 
 import me.nachtok0.yeeportals.PortalMessages;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -17,7 +18,7 @@ public abstract class PortalPlayerSubcommand extends PortalSubcommand {
 			execute(player, args);
 			return true;
 		}
-		PortalMessages.send(sender, "player_only");
+		PortalMessages.sendColorLocalized(sender, ChatColor.RED, "player_only");
 		return true;
 	}
 }

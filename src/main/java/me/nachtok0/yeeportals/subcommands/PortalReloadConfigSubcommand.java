@@ -20,7 +20,7 @@ public class PortalReloadConfigSubcommand extends PortalSubcommand {
 
 	@Override
 	public boolean execute(CommandSender sender, String[] args) {
-		plugin.reloadConfig();
+		plugin.load();
 		PortalMessages.sendColorLocalized(sender, ChatColor.GREEN, "reloaded_config");
 		return true;
 	}

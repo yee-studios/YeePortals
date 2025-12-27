@@ -19,8 +19,6 @@ public class Portal {
 
 	public boolean isInside(Location loc) {
 		if (!loc.getWorld().getName().equals(worldName)) return false;
-		return loc.getX() >= min.getX() && loc.getX() <= max.getX() + 1 &&
-				loc.getY() >= min.getY() && loc.getY() <= max.getY() + 1 &&
-				loc.getZ() >= min.getZ() && loc.getZ() <= max.getZ() + 1;
+		return loc.toVector().isInAABB(min, max.clone().add(new Vector(1, 1, 1)));
 	}
 }

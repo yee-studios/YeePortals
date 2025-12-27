@@ -45,6 +45,7 @@ public class PortalManager {
 	}
 
 	public void savePortals() {
+		config.set("portals", null);
 		for (Portal p : portals) {
 			String path = "portals." + p.name;
 			config.set(path + ".world", p.worldName);

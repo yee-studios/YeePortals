@@ -3,11 +3,11 @@ version: 0.1
 main: me.nachtok0.yeeportals.YeePortals
 author: nachtok0
 api-version: 1.13
+description: Simple and lightweight portal plugin
+
 commands:
   portal:
-    description: Comandos de portales
-    usage: /portal <region|create|connect|disconnect|delete|list>
+
 permissions:
   portal.admin:
-    description: Permite administrar portales
     default: op
