@@ -1,0 +1,37 @@
+player_only: "&c¡Tenés que ser un jugador!"
+no_permission: "&cNo tenés permiso."
+help_menu_title: "Ayuda de %s"
+subcommand_unknown: Subcomando desconocido.
+subcommand_usage: "Uso: %s"
+
+subcommand_descriptions:
+  list: Ver la lista de portales.
+  region: Entrás en el modo de selección de área para crear un portal. Click izquierdo y derecho para marcar el primer y segundo punto.
+  create: Crea un nuevo portal en el área seleccionada actualmente.
+  delete: Elimina un portal.
+  connect: Conecta los portales. Para interconectarlos, ejecutá el comando de nuevo con los parámetros invertidos.
+  disconnect: Quita el destino de un portal.
+  reload: Recarga la configuración del plugin.
+
+region:
+  enabled: Modo de selección de región activado. Marcá las esquinas con click izquierdo y derecho.
+  disabled: Modo de selección de región desactivado.
+
+list:
+  no_portals: No hay portales creados.
+  portals: Lista de Portales
+  no_destination: Sin destino
+
+connected: "Portales conectados: %s"
+disconnected: Portal '%s' desconectado.
+deleted: Portal '%s' eliminado correctamente.
+created: Portal '%s' creado correctamente.
+reloaded_config: Configuración recargada.
+
+portal_unknown_name: No se pudo encontrar un portal con el nombre '%s'.
+portal_already_exists: El portal '%s' ya existe
+no_region_selected: Primero tenés que seleccionar una región usando '%s'.
+points_same_world: Los puntos tienen que estar en el mismo mundo.
+
+selection_pos: Posición %s establecida.
+portal_broken: El portal de destino no existe o está roto.

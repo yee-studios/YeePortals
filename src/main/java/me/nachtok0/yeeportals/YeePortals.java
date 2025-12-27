@@ -24,7 +24,7 @@ public class YeePortals extends JavaPlugin {
 		PortalMessages.localeConfig = YamlConfiguration.loadConfiguration(localeConfigFile);
 
 		getServer().getPluginManager().registerEvents(new PortalEvents(this), this);
-		getCommand("portal").setExecutor(new PortalCommand(manager));
+		getCommand("portal").setExecutor(new PortalCommand(this, manager));
 		getLogger().info("YeePortals activado correctamente.");
 	}
 }

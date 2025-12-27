@@ -5,8 +5,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public abstract class PortalPlayerSubcommand extends PortalSubcommand {
-	public PortalPlayerSubcommand(String name) {
-		super(name);
+	public PortalPlayerSubcommand(String name, String... aliases) {
+		super(name, aliases);
 	}
 
 	public abstract boolean execute(Player player, String[] args);

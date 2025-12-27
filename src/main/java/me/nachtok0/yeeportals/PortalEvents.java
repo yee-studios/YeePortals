@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PortalEvents implements Listener {
 	YeePortals plugin;
@@ -16,24 +17,25 @@ public class PortalEvents implements Listener {
 	}
 
 	@EventHandler
-	public void onInteract(PlayerInteractEvent e) {
-		Player p = e.getPlayer();
-		if (!PortalPlayerData.getSelectionMode().contains(p.getUniqueId())) return;
+	public void onInteract(PlayerInteractEvent event) {
+		Player player = event.getPlayer();
+		if (!PortalPlayerData.getSelectionMode().contains(player.getUniqueId())) return;
 
-		if (e.getAction() != Action.LEFT_CLICK_BLOCK && e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+		if (event.getAction() != Action.LEFT_CLICK_BLOCK && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
 
-		e.setCancelled(true);
-		Location loc = e.getClickedBlock().getLocation();
-		Location[] sel = PortalPlayerData.getSelections().getOrDefault(p.getUniqueId(), new Location[2]);
+		event.setCancelled(true);
+		Location loc = event.getClickedBlock().getLocation();
+		Location[] sel = PortalPlayerData.getSelections().getOrDefault(player.getUniqueId(), new Location[2]);
 
-		if (e.getAction() == Action.LEFT_CLICK_BLOCK) {
+		if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
 			sel[0] = loc;
-			p.sendMessage(ChatColor.GOLD + "Posición 1 establecida.");
+			PortalMessages.sendColorLocalized(player, ChatColor.GOLD, "position_set", 1);
 		} else {
 			sel[1] = loc;
-			p.sendMessage(ChatColor.GOLD + "Posición 2 establecida.");
+			PortalMessages.sendColorLocalized(player, ChatColor.GOLD, "position_set", 2);
 		}
-		PortalPlayerData.getSelections().put(p.getUniqueId(), sel);
+		
+		PortalPlayerData.getSelections().put(player.getUniqueId(), sel);
 	}
 
 	@EventHandler
@@ -63,7 +65,7 @@ public class PortalEvents implements Listener {
 	void handlePortal(Portal portal, Player player, Location to) {
 		Portal targetPortal = plugin.getManager().getPortal(portal.targetName);
 		if (targetPortal == null) {
-			player.sendMessage(ChatColor.RED + "El portal de destino no existe o está roto.");
+			PortalMessages.sendColorLocalized(player, ChatColor.RED, "portal_broken");
 			return;
 		}
 
@@ -107,5 +109,10 @@ public class PortalEvents implements Listener {
 
 		long cooldown = plugin.getConfig().getLong("cooldown", 1000);
 		PortalPlayerData.getTeleportCooldown().put(player.getUniqueId(), System.currentTimeMillis() + cooldown);
+	}
+
+	@EventHandler
+	void onQuit(PlayerQuitEvent event) {
+		PortalPlayerData.getTeleportCooldown().remove(event.getPlayer().getUniqueId());
 	}
 }

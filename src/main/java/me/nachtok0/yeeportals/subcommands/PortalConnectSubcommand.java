@@ -2,6 +2,7 @@ package me.nachtok0.yeeportals.subcommands;
 
 import me.nachtok0.yeeportals.Portal;
 import me.nachtok0.yeeportals.PortalManager;
+import me.nachtok0.yeeportals.PortalMessages;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -16,22 +17,25 @@ public class PortalConnectSubcommand extends PortalPlayerSubcommand {
 
 	@Override
 	public boolean execute(Player player, String[] args) {
-		if (args.length < 3) {
-			player.sendMessage(ChatColor.RED + "Uso: /portal connect <origen> <destino>");
-			return false;
-		}
+		if (args.length < 3) return false;
 
 		Portal from = manager.getPortal(args[1]);
 		Portal to = manager.getPortal(args[2]);
 
-		if (from == null || to == null) {
-			player.sendMessage(ChatColor.RED + "Uno de los portales no existe.");
+		if (from == null) {
+			PortalMessages.sendColorLocalized(player, ChatColor.RED, "portal_unknown_name", args[1]);
+			return true;
+		}
+
+		if (to == null) {
+			PortalMessages.sendColorLocalized(player, ChatColor.RED, "portal_unknown_name", args[2]);
 			return true;
 		}
 
 		from.targetName = to.name;
 		manager.savePortals();
-		player.sendMessage(ChatColor.GREEN + "Portales conectados: " + from.name + " -> " + to.name);
+		PortalMessages.sendLocalized(player, "connected",
+				String.format("&b%s &e-> &b%s", from.name, to.name));
 		return true;
 	}
 

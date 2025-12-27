@@ -1,5 +1,6 @@
 package me.nachtok0.yeeportals.subcommands;
 
+import me.nachtok0.yeeportals.PortalMessages;
 import me.nachtok0.yeeportals.PortalPlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -9,7 +10,7 @@ import java.util.UUID;
 
 public class PortalRegionSubcommand extends PortalPlayerSubcommand {
 	public PortalRegionSubcommand() {
-		super("region");
+		super("region", "points");
 	}
 
 	@Override
@@ -17,10 +18,10 @@ public class PortalRegionSubcommand extends PortalPlayerSubcommand {
 		Set<UUID> selectionMode = PortalPlayerData.getSelectionMode();
 		if (selectionMode.contains(player.getUniqueId())) {
 			selectionMode.remove(player.getUniqueId());
-			player.sendMessage(ChatColor.YELLOW + "Modo selección desactivado.");
+			PortalMessages.sendColorLocalized(player, ChatColor.YELLOW, "region.disabled");
 		} else {
 			selectionMode.add(player.getUniqueId());
-			player.sendMessage(ChatColor.GREEN + "Modo selección activado. Usa Clic Izq/Der para marcar esquinas.");
+			PortalMessages.sendColorLocalized(player, ChatColor.GREEN, "region.enabled");
 		}
 		return true;
 	}

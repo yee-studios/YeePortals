@@ -2,6 +2,7 @@ package me.nachtok0.yeeportals.subcommands;
 
 import me.nachtok0.yeeportals.Portal;
 import me.nachtok0.yeeportals.PortalManager;
+import me.nachtok0.yeeportals.PortalMessages;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
@@ -24,16 +25,16 @@ public class PortalListSubcommand extends PortalSubcommand {
 	public boolean execute(CommandSender sender, String[] args) {
 		List<Portal> portals = manager.getPortals();
 		if (portals.isEmpty()) {
-			sender.sendMessage(ChatColor.YELLOW + "No hay portales creados.");
+			PortalMessages.sendColorLocalized(sender, ChatColor.RED, "list.no_portals");
 			return true;
 		}
-		sender.sendMessage(ChatColor.GOLD + "--- Lista de Portales (" + portals.size() + ") ---");
+		PortalMessages.send(sender, "&6--- %s --- (%s)", PortalMessages.get("list.portals"), portals.size());
 		for (Portal portal : portals) {
 			String target = (portal.targetName == null || portal.targetName.isEmpty())
-					? ChatColor.RED + "Sin destino"
+					? ChatColor.RED + PortalMessages.get("no_destination")
 					: ChatColor.GREEN + "-> " + portal.targetName;
 
-			sender.sendMessage(ChatColor.AQUA + portal.name + ChatColor.GRAY + " (" + portal.worldName + ") " + target);
+			PortalMessages.send(sender, "&b%s &7(%s) %s", portal.name, portal.worldName, target);
 		}
 		return true;
 	}

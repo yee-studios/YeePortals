@@ -2,6 +2,7 @@ package me.nachtok0.yeeportals.subcommands;
 
 import me.nachtok0.yeeportals.Portal;
 import me.nachtok0.yeeportals.PortalManager;
+import me.nachtok0.yeeportals.PortalMessages;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -15,19 +16,19 @@ public class PortalDisconnectSubcommand extends PortalPlayerSubcommand {
 
 	@Override
 	public boolean execute(Player player, String[] args) {
-		if (args.length < 2) {
-			player.sendMessage(ChatColor.RED + "Uso: /portal disconnect <nombre>");
-			return false;
-		}
-		Portal portal = manager.getPortal(args[1]);
+		if (args.length < 2) return false;
+
+		String name = args[1];
+		Portal portal = manager.getPortal(name);
+
 		if (portal == null) {
-			player.sendMessage(ChatColor.RED + "El portal no existe.");
+			PortalMessages.sendColorLocalized(player, ChatColor.RED, "portal_unknown_name", name);
 			return true;
 		}
 
 		portal.targetName = null;
 		manager.savePortals();
-		player.sendMessage(ChatColor.GREEN + "El portal '" + portal.name + "' ha sido desconectado.");
+		PortalMessages.sendColorLocalized(player, ChatColor.GREEN, "disconnected", name);
 		return true;
 	}
 

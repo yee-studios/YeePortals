@@ -3,7 +3,6 @@ no_permission: "&cNo permission."
 help_menu_title: "%s Help"
 subcommand_unknown: Unknown subcommand.
 subcommand_usage: "Usage: %s"
-portal_unknown_name: Could not find a portal with the name '%s'.
 
 subcommand_descriptions:
   list: View the portal list.
@@ -25,9 +24,14 @@ list:
 
 connected: "Connected portals: %s"
 disconnected: Disconnected portal '%s'.
-deleted: Deleted portal '%s'.
-created: Created portal '%s'.
+deleted: Successfully deleted portal '%s'.
+created: Successfully created portal '%s'.
+reloaded_config: Config reloaded.
 
+portal_unknown_name: Could not find a portal with the name '%s'.
 portal_already_exists: Portal '%s' already exists
-no_region_selected: You must select a region first.
+no_region_selected: You must first select a region using '%s'.
 points_same_world: The points need to be in the same world.
+
+selection_pos: Position %s set.
+portal_broken: The destination portal is broken, or does not exist.
