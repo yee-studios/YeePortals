@@ -17,9 +17,7 @@ public class PortalCreateSubcommand extends PortalPlayerSubcommand {
 	}
 
 	public boolean execute(Player player, String[] args) {
-		if (args.length < 2) {
-			return false;
-		}
+		if (args.length < 2) return false;
 
 		String name = args[1];
 		if (manager.getPortal(name) != null) {

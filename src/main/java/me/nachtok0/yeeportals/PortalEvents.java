@@ -1,6 +1,9 @@
 package me.nachtok0.yeeportals;
 
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -34,7 +37,7 @@ public class PortalEvents implements Listener {
 			sel[1] = loc;
 			PortalMessages.sendColorLocalized(player, ChatColor.GOLD, "position_set", 2);
 		}
-		
+
 		PortalPlayerData.getSelections().put(player.getUniqueId(), sel);
 	}
 
@@ -79,33 +82,11 @@ public class PortalEvents implements Listener {
 		Location destLoc = targetPortal.min.toLocation(targetWorld);
 
 		destLoc.add(offsetX, offsetY, offsetZ);
-
 		destLoc.setYaw(player.getLocation().getYaw());
 		destLoc.setPitch(player.getLocation().getPitch());
 
 		player.teleport(destLoc);
-
-		String[] splitted = plugin.getConfig().getString("sound").split(";");
-
-		Sound sound = Sound.ORB_PICKUP;
-		try {
-			sound = Sound.valueOf(splitted[0]);
-		} catch (Exception ignored) {
-		}
-
-		float volume = 1;
-		try {
-			volume = Float.parseFloat(splitted[1]);
-		} catch (Exception ignored) {
-		}
-
-		float pitch = 1;
-		try {
-			pitch = Float.parseFloat(splitted[2]);
-		} catch (Exception ignored) {
-		}
-
-		player.playSound(destLoc, sound, volume, pitch);
+		plugin.playSoundFromConfig(player, plugin.getConfig().getString("sound"), destLoc);
 
 		long cooldown = plugin.getConfig().getLong("cooldown", 1000);
 		PortalPlayerData.getTeleportCooldown().put(player.getUniqueId(), System.currentTimeMillis() + cooldown);
