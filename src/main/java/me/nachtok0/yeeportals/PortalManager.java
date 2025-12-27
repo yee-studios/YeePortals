@@ -56,11 +56,13 @@ public class PortalManager {
 		try {
 			config.save(new File(plugin.getDataFolder(), "portals.yml"));
 		} catch (IOException throwable) {
-			plugin.getLogger().log(Level.SEVERE, "Could not save portals!", throwable);
+			plugin.getLogger().log(Level.SEVERE, "Could not save portals.yml!", throwable);
 		}
 	}
 
 	public void loadPortals() {
+		loadConfig();
+
 		portals.clear();
 		ConfigurationSection sec = config.getConfigurationSection("portals");
 		if (sec == null) return;
@@ -74,6 +76,17 @@ public class PortalManager {
 			Portal portal = new Portal(key, world, min, max);
 			portal.targetName = target;
 			portals.add(portal);
+		}
+	}
+
+	public void loadConfig() {
+		try {
+			File file = new File(plugin.getDataFolder(), "portals.yml");
+			if (file.exists()) {
+				config.load(file);
+			}
+		} catch (Exception e) {
+			plugin.getLogger().log(Level.SEVERE, "Could not load portals.yml!", e);
 		}
 	}
 }
