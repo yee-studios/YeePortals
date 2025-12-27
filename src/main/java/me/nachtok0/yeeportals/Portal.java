@@ -4,11 +4,11 @@ import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
 public class Portal {
-	String name;
-	String worldName;
-	Vector min;
-	Vector max;
-	String targetName;
+	public String name;
+	public String worldName;
+	public Vector min;
+	public Vector max;
+	public String targetName;
 
 	public Portal(String name, String worldName, Vector v1, Vector v2) {
 		this.name = name;
